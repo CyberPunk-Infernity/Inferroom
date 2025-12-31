@@ -34,7 +34,7 @@
 ## 🚀 快速开始（从编译到启动）
 
 ### 0) 环境要求
-- Go 1.20+（推荐 1.21/1.22）
+- Go 1.20+
 - macOS / Linux / Windows 均可
 
 检查 Go 是否安装成功：
@@ -45,8 +45,8 @@ go version
 ### 1) 拉取代码
 
 ```
-git clone <your-repo-url>.git
-cd <your-repo-name>
+git clone https://github.com/CyberPunk-Infernity/Inferroom.git
+cd Inferroom
 ```
 
 ------
@@ -105,5 +105,6 @@ AES Key (base64): <COPY_THIS_KEY>
 ```
 ./bin/client 127.0.0.1 9000 <COPY_THIS_KEY>
 ```
+
 
 连接成功后会进入交互式输入
