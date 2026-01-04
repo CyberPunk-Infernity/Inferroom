@@ -19,6 +19,44 @@
 
 ---
 
+## 🫧 Bubble Tea TUI 客户端
+
+基于 **Charmbracelet Bubble Tea** 构建，采用事件驱动的 TUI（Terminal User Interface）架构，在保持命令行轻量特性的同时，提供接近现代即时通讯工具（如 Slack / WeChat）的交互体验。
+
+### ✨ TUI 设计亮点
+
+- **上下分屏布局**
+  - 上半部分：消息滚动区域（viewport）
+  - 下半部分：输入框（textinput）
+  - 异步网络消息只更新消息区，不会打断用户输入
+
+- **事件驱动模型（Msg / Cmd）**
+  - 网络 I/O 在独立 goroutine 中运行
+  - 所有网络事件通过 `channel → tea.Msg` 送入 UI 主循环
+  - UI 状态仅在 `Update()` 中修改，避免并发竞争
+
+- **跨平台一致体验**
+  - macOS / Linux / Windows 行为一致
+  - 可在 SSH、tmux、远程服务器环境中使用
+
+- **键盘友好**
+  - `Enter`：发送消息
+  - `↑ / ↓`：
+    - 输入框非空：浏览输入历史
+    - 输入框为空：滚动消息
+  - `PgUp / PgDn`：快速滚动消息
+  - `Ctrl+C / Esc`：安全退出
+
+- **命令行历史记录**
+  - 自动保存输入历史到本地临时文件
+  - 重启客户端后仍可通过方向键召回
+  - 行为与 shell / readline 一致
+
+- **异步文件传输**
+  - 文件上传 / 下载在后台执行
+  - UI 不阻塞、不冻结
+  - 以系统消息形式提示结果
+
 ## 🧠 协议简介
 
 ### 1) Frame 封包（解决 TCP 粘包/拆包）
@@ -108,3 +146,4 @@ AES Key (base64): <COPY_THIS_KEY>
 
 
 连接成功后会进入交互式输入
+
